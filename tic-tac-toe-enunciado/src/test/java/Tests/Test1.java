@@ -6,23 +6,13 @@ package Tests;
  * and open the template in the editor.
  */
 
-import es.codeurjc.ais.tictactoe.Board;
-import es.codeurjc.ais.tictactoe.Connection;
 import es.codeurjc.ais.tictactoe.Player;
 import es.codeurjc.ais.tictactoe.TicTacToeGame;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.codeurjc.ais.tictactoe.TicTacToeGame.EventType;
-import static org.hamcrest.CoreMatchers.hasItems;
 
 
 
@@ -50,20 +40,16 @@ public class Test1 {
         p1 = new Player(0,"cross","pepe");
         p2 = new Player(1,"circle","juan");
         juego = new TicTacToeGame();
+        juego.addPlayer(p1);
+        juego.addPlayer(p2);
         
     }
     
-//    @BeforeClass
-//    public void antesClase(){
-//        juego.disableAll();
-//        juego.enableAll();
-//    }
     
     @Test
     public void testPlayer1Wins() throws Exception {                        
 
-        juego.addPlayer(p1);
-        juego.addPlayer(p2);
+       
         juego.mark(0);// PLAYER 1
         juego.mark(5);// PLAYER 2
         juego.mark(1);// PLAYER 1
@@ -76,8 +62,7 @@ public class Test1 {
     @Test
     public void testPlayer2Wins() throws Exception {                        
         
-        juego.addPlayer(p1);
-        juego.addPlayer(p2);
+      
         juego.mark(8);// PLAYER 1
         juego.mark(0);// PLAYER 2
         juego.mark(7);// PLAYER 1
@@ -91,9 +76,7 @@ public class Test1 {
     }
     @Test
     public void testCheck() throws Exception {                        
-        
-        juego.addPlayer(p1);
-        juego.addPlayer(p2);
+
         juego.mark(0);// PLAYER 1
         juego.mark(2);// PLAYER 2
         juego.mark(1);// PLAYER 1
