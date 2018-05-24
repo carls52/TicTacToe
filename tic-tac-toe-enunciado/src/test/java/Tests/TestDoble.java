@@ -10,24 +10,16 @@ import es.codeurjc.ais.tictactoe.Player;
 import es.codeurjc.ais.tictactoe.TicTacToeGame;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
-
 import static org.mockito.Mockito.reset;
-
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-
 import es.codeurjc.ais.tictactoe.TicTacToeGame.EventType;
 import es.codeurjc.ais.tictactoe.TicTacToeGame.WinnerValue;
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import org.mockito.ArgumentCaptor;
 import static org.mockito.Mockito.mock;
-
 import static org.mockito.Mockito.verify;
 
 
@@ -43,6 +35,7 @@ public class TestDoble {
     Player p2;
     ArgumentCaptor<WinnerValue> argument;
     int [] solucion = {0,1,2};
+    
     @Before
     public void setUp(){
         con_1 = mock(Connection.class);
@@ -53,14 +46,11 @@ public class TestDoble {
         p1 = new Player(0,"cross","pepe");
         p2 = new Player(1,"circle","juan");
         
-        //argument = ArgumentCaptor.forClass(WinnerResult.class);
-        
         juego.addPlayer(p1);
         verify(con_1).sendEvent(
                             eq(EventType.JOIN_GAME), argThat(hasItems(p1)));
         verify(con_2).sendEvent(
-                            eq(EventType.JOIN_GAME), argThat(hasItems(p1)));
-        
+                            eq(EventType.JOIN_GAME), argThat(hasItems(p1)));  
         reset(con_1);
         reset(con_2);
         juego.addPlayer(p2);
@@ -69,19 +59,14 @@ public class TestDoble {
                             eq(EventType.JOIN_GAME), argThat(hasItems(p1,p2)));
         verify(con_2).sendEvent(
                             eq(EventType.JOIN_GAME), argThat(hasItems(p1,p2)));
-   //     reset(con_1);
-   //     reset(con_2);
+
         verify(con_1).sendEvent(EventType.SET_TURN, p1);
         verify(con_2).sendEvent(EventType.SET_TURN, p1);
-        
-//                            eq(EventType.SET_TURN), argThat(hasItems(juego.getPlayers())));
-//       verify(con_2).sendEvent(
-//                            eq(EventType.SET_TURN), argThat(hasItems(juego.getPlayers())));
-        
     }
+    
     @Test
     public void testPlayer1Wins() throws Exception {
-        System.out.println("hola soy una prueba");
+        
         reset(con_1);
         reset(con_2);
         juego.mark(0);// PLAYER 1
@@ -115,7 +100,7 @@ public class TestDoble {
     }
     @Test
     public void testPlayer2Wins() throws Exception {
-        System.out.println("hola soy una prueba");//8 0 7 1 4 2
+        //8 0 7 1 4 2
         
         reset(con_1);
         reset(con_2);
@@ -155,7 +140,7 @@ public class TestDoble {
     }
     @Test
     public void testCheck() throws Exception {
-        System.out.println("hola soy una prueba");// 0 2 1 3 5 4 6 8 7
+       // 0 2 1 3 5 4 6 8 7
         
         reset(con_1);
         reset(con_2);
